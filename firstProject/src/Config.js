@@ -61,7 +61,7 @@ export class Survice {
         }
     }
     getFile(fileId){
-         return this.bucket.getFilePreview(Conf.appwriteBucketId, fileId)
+         return this.bucket.getFileView(Conf.appwriteBucketId, fileId)
     }
     async deleteFile(fileId){
         try {
