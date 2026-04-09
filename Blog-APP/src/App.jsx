@@ -1,12 +1,16 @@
 import './App.css'
-import Conf from './Conf'
+import {Outlet} from "react-router-dom"
+import Header from './Header'
+import Footer from './Footer'
 
 function App() {
   
   return (
-    <h1>
-      Blog-APP
-    </h1>
+    <>
+    <Header/>
+      <Outlet/>
+    <Footer/> 
+    </>
   )
 }
 
