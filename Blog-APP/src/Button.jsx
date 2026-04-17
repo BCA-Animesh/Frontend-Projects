@@ -1,8 +1,10 @@
 import React from 'react'
 
-function Button() {
+function Button({children,className='',bgcolor="bg-blue-600",type="button",textColor = "text-white",...props}) {
   return (
-    <div>Button</div>
+    <button type={type}className={`${bgcolor}${textColor}${className}`}{...props}>
+      {children}
+    </button>
   )
 }
 

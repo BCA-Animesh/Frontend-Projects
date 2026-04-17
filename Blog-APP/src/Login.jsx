@@ -35,7 +35,7 @@ function Login() {
         </h2>
         <p>
            Don&apos;t have any account?&nbsp;
-           <Link to={`./signup`}>
+           <Link to={`./Signup`}>
            Signup
            </Link>
         </p>
@@ -54,9 +54,9 @@ function Login() {
               placeHolder='Enter your password'
               {...register("password",{required:true})}
             />
-            <Button type='submit'
-              signIn
-            />
+            <Button type='submit'>
+              Signin
+            </Button>
           </div>
         </form>
       </div>
