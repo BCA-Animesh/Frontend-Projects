@@ -1,11 +1,23 @@
 import './App.css'
-import {Outlet} from "react-router-dom"
+import {data, Outlet} from "react-router-dom"
 import Header from './Header'
 import Footer from './Footer'
+import React, { useEffect, useState } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import authentication from './Auth'
+import { login, logout } from './AuthSlice'
+
 
 function App() {
-  
-  return (
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    authentication.getUser().then((data)=>{
+      if (data) { 
+            dispatch(login({data}))
+          }
+    })
+  },[])
+  return(
     <>
     <Header/>
       <Outlet/>

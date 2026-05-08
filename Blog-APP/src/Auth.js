@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import Conf from './Conf'
 
 export class Authentication{
@@ -32,8 +32,12 @@ export class Authentication{
             throw error
         }
     }
-    getUser(){
-        return this.auth.currentUser
+    async getUser(){
+        return new Promise((resolve,reject)=>{
+            onAuthStateChanged(this.auth,(user)=>{
+                resolve(user)
+            },reject)
+        })
     }
 }
 const authentication=new Authentication()

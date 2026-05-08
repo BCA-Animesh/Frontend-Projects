@@ -1,13 +1,11 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 function Home() {
-  const user=useSelector((state)=>state.Auth.status)
- 
+  const authStatus=useSelector((state)=>state.Auth.status)
   return (
     <div>
       {
-        user? "ok":'Please Login'
+        authStatus? "ok":'Please Login'
       }
     </div>
   )

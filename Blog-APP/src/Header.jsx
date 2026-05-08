@@ -1,7 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Logout from './Logout'
 
 function Header() {
+    const authStatus=useSelector((state)=>state.Auth.status)
     const nevigate=useNavigate()
     const nevitems=[
         {
@@ -29,6 +32,11 @@ function Header() {
             </li>
                 
             ))
+        }
+        {
+            authStatus && (<li>
+                <Logout/>
+            </li>)
         }
         </ul>
     </header>
