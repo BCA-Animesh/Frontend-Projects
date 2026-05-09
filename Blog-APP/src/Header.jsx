@@ -18,6 +18,10 @@ function Header() {
         {
             name:'Signup',
             slug:'/Signup'
+        },
+        {
+            name:'Add Post',
+            slug:'/AddPost'
         }
     ]
   return (
