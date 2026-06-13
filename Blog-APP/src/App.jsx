@@ -13,7 +13,7 @@ function App() {
   useEffect(()=>{
     authentication.getUser().then((data)=>{
       if (data) { 
-            dispatch(login({data}))
+            dispatch(login({...data}))
           }
     })
   },[])
