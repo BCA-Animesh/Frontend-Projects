@@ -12,7 +12,7 @@ export class Survice{
         this.database=getDatabase(this.app)
         this.storage=getStorage(this.app)
     }
-    async createPost({userId, slug, title, content, imageUrl}){
+    async createPost(userId,{slug, title, content, imageUrl}){
         try {
             const postRef=DBRef(this.database, `users/${userId}/posts`)
             const newRef=push(postRef)
