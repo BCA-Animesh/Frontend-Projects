@@ -12,17 +12,20 @@ export class Survice{
         this.database=getDatabase(this.app)
         this.storage=getStorage(this.app)
     }
-    async createPost(userId,{slug, title, content, imageUrl}){
+    async createId(userId){
+        const postRef=DBRef(this.database, `users/${userId}/posts`)
+        return push(postRef)
+    }
+    async createPost(postRef,{slug, title, content, featuredimage}){
         try {
-            const postRef=DBRef(this.database, `users/${userId}/posts`)
-            const newRef=push(postRef)
-            await set(newRef,{
+            await set(postRef,{
                 slug:slug,
                 title:title,
                 content:content,
-                featuredimage:imageUrl,
-                id:newRef.key
+                featuredimage:featuredimage,
+                id:postRef.key
             })
+            return true
         } catch (error) {
             throw error   
         }
@@ -30,6 +33,7 @@ export class Survice{
     async updatePost(userId, updatedPost, postId){
         try {
             await update(DBRef(this.database, `users/${userId}/posts/${postId}`), updatedPost)
+            return true
         } catch (error) {
             throw error
         }

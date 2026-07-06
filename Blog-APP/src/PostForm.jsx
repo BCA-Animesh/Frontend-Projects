@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import {useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import survice from './Config'
+import Input from './Input'
+import RTX from './RTE'
 
 export default function PostForm({post}) {
     const {register,setValue,handleSubmit,getValues,control,watch}=useForm({defaultValues:{
@@ -11,8 +13,8 @@ export default function PostForm({post}) {
       slug:post?.slug||''
     }})
     const userData=useSelector((state)=>state.Auth.userData)
-    const nevigate=useNavigate()
-    const subbmit=async(data)=>{
+    const navigate=useNavigate()
+    const submit=async(data)=>{
       if (post) {
         const file=data.image[0]?await survice.uploadFile(userData,data.image[0],post.id):null
         delete data.image
@@ -21,17 +23,20 @@ export default function PostForm({post}) {
         }
         const dbPost=await survice.updatePost(userData,{...data},post.id)
         if (dbPost) {
-          nevigate(`/post/${post.id}`)
+          navigate(`/post/${post.id}`)
         }
       } else {
-        const file=await survice.uploadFile(userData,data.image[0],post.id)
-        delete data.image
-        if (file) {
-          data.featuredimage=await survice.getFile(userData,post.id)
-        }
-        const dbPost=await survice.createPost(userData,{...data})
-        if (dbPost) {
-          nevigate(`/post/${post.id}`)
+        const postRef=await survice.createId(userData)
+        if (postRef) {
+          const file=await survice.uploadFile(userData,data.image[0],postRef.key)
+          delete data.image
+          if (file) {
+            data.featuredimage=await survice.getFile(userData,postRef.key)
+            const dbPost=await survice.createPost(postRef,{...data})
+            if (dbPost) {
+              navigate(`/post/${postRef.key}`)
+            }
+          }
         }
       }
     }
@@ -39,7 +44,7 @@ export default function PostForm({post}) {
       if (value && typeof value==="string") 
         return value
         .trim()
-        .toLowercase()
+        .toLowerCase()
         .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
 
@@ -51,9 +56,45 @@ export default function PostForm({post}) {
           setValue('slug',slugTransform(value.title),{shouldValidate:true})
         }
       })
-      return subscribtion.unsubscribe
+      return ()=>subscribtion.unsubscribe()
     },[watch,slugTransform,setValue])
   return (
-    <div>PostForm</div>
+    <form onSubmit={handleSubmit(submit)}>
+      <div>
+        <Input
+          lable='Title'
+          placeholder='Title'
+          {...register('title',{required:true})}
+        />
+        <Input
+          lable='Slug'
+          placeholder='Slug'
+          {...register('slug',{required:true})}
+          onInput={(e)=>setValue('slug',slugTransform(e.currentTarget.value),{shouldValidate:true})}
+        />
+        <RTE
+          lable='Content'
+          name='content'
+          control={control}
+          defaultValues={getValues('content')}
+        />
+      </div>
+      <div>
+        <Input
+          lable='Featured Image'
+          type='file'
+          accept='image/jpg, image/png, image/jpeg, image/gif'
+          {...register('image',{required:!post})}
+        />
+        {
+          post && <div>
+            <img src={post.featuredimage} alt={post.title} />
+          </div>
+        }
+        <Button type='submit'>
+          {post?'Update':'Submit'}
+        </Button> 
+      </div>
+    </form>
   )
 }
