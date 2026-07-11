@@ -1,15 +1,17 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Container from './Container';
+import PostForm from './PostForm'
 
 function AddPost() {
- const authStatus=useSelector((state)=>state.Auth.status)
  const userData=useSelector((state)=>state.Auth.userData)
   console.log(userData);
-  
-  return authStatus ? (
-    <p>Add post</p>
-  ) : (
-    <p>Please Login</p>
+  return (
+    <div>
+      <Container>
+        <PostForm/>
+      </Container>
+    </div>
   )
 }
 

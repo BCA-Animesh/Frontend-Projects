@@ -9,19 +9,28 @@ function Header() {
     const nevitems=[
         {
             name:"Home",
-            slug:'/'
+            slug:'/',
+            active:true
         },
         {
             name:'Login',
-            slug:'/Login'
+            slug:'/Login',
+            active:!authStatus
         },
         {
             name:'Signup',
-            slug:'/Signup'
+            slug:'/Signup',
+            active:!authStatus
         },
         {
             name:'Add Post',
-            slug:'/AddPost'
+            slug:'/AddPost',
+            active:authStatus
+        },
+        {
+            name:'All Posts',
+            slug:'/AllPosts',
+            active:authStatus
         }
     ]
   return (

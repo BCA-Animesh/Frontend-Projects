@@ -4,7 +4,8 @@ import {useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import survice from './Config'
 import Input from './Input'
-import RTX from './RTE'
+import RTE from './RTE'
+import Button from './Button'
 
 export default function PostForm({post}) {
     const {register,setValue,handleSubmit,getValues,control,watch}=useForm({defaultValues:{
