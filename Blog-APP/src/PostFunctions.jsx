@@ -40,7 +40,7 @@ function PostFunctions() {
         {
           isAuthor && (
             <div>
-              <Link to={`./editPost/${post.id}`}>
+              <Link to={`/editPost/${post.uid}/${post.id}`}>
               <Button>
                 Edit
               </Button>
