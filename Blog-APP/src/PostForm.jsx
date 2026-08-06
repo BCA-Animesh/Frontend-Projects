@@ -17,27 +17,24 @@ export default function PostForm({post}) {
     const navigate=useNavigate()
     const submit=async(data)=>{
       if (post) {
-        const file=data.image[0]?await survice.uploadFile(userData,data.image[0],post.id):null
+        const file=data.image[0]?await survice.uploadFile(data.image[0]):null
         delete data.image
         if (file) {
-          data.featuredimage=await survice.getFile(userData,post.id)
+          data.featuredimage=file.secure_url
         }
         const dbPost=await survice.updatePost(userData,{...data},post.id)
         if (dbPost) {
-          navigate(`/post/${post.id}`)
+          navigate(`/post/${post.uid}/${post.id}`)
         }
       } else {
-        const postRef=await survice.createId(userData)
-        if (postRef) {
-          const file=await survice.uploadFile(userData,data.image[0],postRef.key)
+          const file=await survice.uploadFile(data.image[0])
           delete data.image
           if (file) {
-            data.featuredimage=await survice.getFile(userData,postRef.key)
-            const dbPost=await survice.createPost(postRef,{...data})
+            data.featuredimage=file.secure_url
+            const dbPost=await survice.createPost(userData,{...data})
             if (dbPost) {
-              navigate(`/post/${postRef.key}`)
+              navigate(`/post/${userData}/${dbPost}`)
             }
-          }
         }
       }
     }

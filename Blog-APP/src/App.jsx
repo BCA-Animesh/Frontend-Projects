@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import authentication from './Auth'
 import { login, logout } from './AuthSlice'
+import Conf from './Conf'
 
 
 function App() {

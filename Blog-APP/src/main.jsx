@@ -10,6 +10,8 @@ import store from './store.js'
 import Signup from './Signup.jsx'
 import AddPost from './AddPost.jsx'
 import AllPosts from './AllPosts.jsx'
+// import Post from './Post.jsx'
+import PostFunctions from './PostFunctions.jsx'
 
 const router=createBrowserRouter([
   {
@@ -39,6 +41,10 @@ const router=createBrowserRouter([
       {
         path:'/AllPosts',
         element:<AllPosts/>
+      },
+      {
+        path:'/post/:uid/:pid',
+        element:<PostFunctions/>
       }
     ]
   }

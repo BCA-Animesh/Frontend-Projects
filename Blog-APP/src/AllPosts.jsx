@@ -11,9 +11,11 @@ function AllPosts() {
         survice.getPosts(userData).then((posts)=>{
             if (posts) {
                 setPosts(posts)
+                console.log(posts);
+                
             }
         })
-     },[])
+     },[userData])
   return (
     <div>
         <Container>
