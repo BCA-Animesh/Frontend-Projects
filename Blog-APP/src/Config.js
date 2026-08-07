@@ -50,6 +50,15 @@ export class Survice{
             return false
         }
     }
+    async getAllPosts(){
+        try {
+            const snapshot= await get(DBRef(this.database, `users`))
+            return Object.values(snapshot.val())
+        } catch (error) {
+            console.log(error);
+            return false
+        }
+    }
     async getPost(userId, postId){
         try {
             const snapshot= await get(DBRef(this.database, `users/${userId}/posts/${postId}`))

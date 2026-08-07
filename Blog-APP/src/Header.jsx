@@ -38,12 +38,11 @@ function Header() {
         <ul>
         {
             nevitems.map((item)=>(
-            <li key={item.name}>
+            item.active ? <li key={item.name}>
                 <button onClick={()=>nevigate(item.slug)}>
                     {item.name}
                 </button>
-            </li>
-                
+            </li> : null
             ))
         }
         {
