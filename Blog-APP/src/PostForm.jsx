@@ -13,7 +13,7 @@ export default function PostForm({post}) {
       content:post?.content||'',
       slug:post?.slug||''
     }})
-    const userData=useSelector((state)=>state.Auth.userData)
+    const userData=useSelector((state)=>state.Auth.userData)?.uid
     const navigate=useNavigate()
     const submit=async(data)=>{
       if (post) {

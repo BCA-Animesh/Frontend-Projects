@@ -10,7 +10,7 @@ import parse from 'html-react-parser'
 function PostFunctions() {
     const {uid,pid}=useParams()
     const [post,setPost]=useState()
-    const userData=useSelector((state)=>state.Auth.userData)
+    const userData=useSelector((state)=>state.Auth.userData)?.uid
     const isAuthor=uid && userData ? uid===userData : false
     const navigate=useNavigate()
     useEffect(()=>{

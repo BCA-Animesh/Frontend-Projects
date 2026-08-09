@@ -8,11 +8,9 @@ function AllPosts() {
      const userData=useSelector((state)=>state.Auth.userData)
      const [posts, setPosts]=useState([])
      useEffect(()=>{
-        survice.getPosts(userData).then((posts)=>{
+        survice.getPosts(userData?.uid).then((posts)=>{
             if (posts) {
                 setPosts(posts)
-                console.log(posts);
-                
             }
         })
      },[userData])

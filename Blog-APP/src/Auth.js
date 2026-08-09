@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "firebase/auth";
 import Conf from './Conf'
 
 export class Authentication{
@@ -39,6 +39,19 @@ export class Authentication{
             },reject)
         })
     }
+    // Profile
+    async setProfile({userName, imageUrl}){
+        try {
+           await updateProfile(this.auth.currentUser,{
+            displayName:userName,
+            photoURL:imageUrl
+           })
+           return true
+        } catch (error) {
+            throw error
+        }
+    }
+    
 }
 const authentication=new Authentication()
 

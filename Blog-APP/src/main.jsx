@@ -13,6 +13,8 @@ import AllPosts from './AllPosts.jsx'
 // import Post from './Post.jsx'
 import PostFunctions from './PostFunctions.jsx'
 import EditPost from './EditPost.jsx'
+import MyAccount from './MyAccount.jsx'
+import EditProfile from './EditProfile.jsx'
 
 const router=createBrowserRouter([
   {
@@ -50,6 +52,14 @@ const router=createBrowserRouter([
       {
         path:'/editPost/:uid/:pid',
         element:<EditPost/>
+      },
+      {
+        path:'/MyAccount',
+        element:<MyAccount/>
+      },
+      {
+        path:'/editProfile',
+        element:<EditProfile/>
       }
     ]
   }

@@ -18,7 +18,7 @@ function Login() {
       const sesson =await authentication.signIn(data)
       if(sesson){
         const userData =await authentication.getUser()
-        if(userData){console.log(userData);
+        if(userData){
           dispatch(storeLogin(userData))
           nevigate('/')
         }

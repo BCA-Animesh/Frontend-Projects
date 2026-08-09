@@ -1,9 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 function Post({uid, id, title, featuredimage}) {
-    // const userData=useSelector((state)=>state.Auth.userData)
   return (
     <Link to={`/post/${uid}/${id}`}>
         <div>

@@ -31,6 +31,11 @@ function Header() {
             name:'All Posts',
             slug:'/AllPosts',
             active:authStatus
+        },
+        {
+            name:'My Account',
+            slug:'/MyAccount',
+            active:authStatus
         }
     ]
   return (
